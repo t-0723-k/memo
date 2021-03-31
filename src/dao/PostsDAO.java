@@ -1,6 +1,11 @@
 package dao;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import model.Post;
 
@@ -16,9 +21,37 @@ public class PostsDAO {
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 //			SQL文の準備
+			String sql = "SELECT * FROM POSTS";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		} catch() {
+//			SELECT文の実行
+			ResultSet rs = pStmt.executeQuery();
 
+			ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
+
+			while(rs.next()) {
+				HashMap<String, String> columns = new HashMap<String, String>();
+
+				String id = rs.getString("id");
+				columns.put("id", id);
+
+				String title = rs.getString("title");
+				columns.put("title", title);
+
+				String content = rs.getString("content");
+				columns.put("content", content);
+
+				rows.add(columns);
+			}
+
+//			request.setAttribute("rows", rows);
+
+		} catch(Exception e) {
+//			request.setAttribute("message", "Exception:" + e.getMessage());
+			e.printStackTrace();
+			return null;
 		}
+
+		return post;
 	}
 }
