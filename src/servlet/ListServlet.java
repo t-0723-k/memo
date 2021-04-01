@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +17,12 @@ public class ListServlet extends HttpServlet {
 
 //		request.setAttribute("message", "hello paiza memo");
 //		String view = "/WEB-INF/views/list.jsp";
-//		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-//		dispatcher.forward(request, response);
-
-		if(request.getAttribute("message") == null) {
-			request.setAttribute("message", "hello memo");
-		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/list.jsp");
+		dispatcher.forward(request, response);
+//
+//		if(request.getAttribute("message") == null) {
+//			request.setAttribute("message", "hello memo");
+//		}
 
 	}
 
