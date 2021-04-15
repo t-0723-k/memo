@@ -15,7 +15,13 @@ public class PostsDAOTest {
 	public static void testDisplayPosts() {
 		PostsDAO dao = new PostsDAO();
 		List<Post> pl = dao.displayPosts();
-		System.out.println(pl);
+
+		for(Post post: pl) {
+			System.out.println(post.getId());
+			System.out.println(post.getTitle());
+			System.out.println(post.getContent());
+		}
+
 	}
 
 }
