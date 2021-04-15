@@ -1,6 +1,6 @@
 package test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import dao.PostsDAO;
 import model.Post;
@@ -14,7 +14,7 @@ public class PostsDAOTest {
 
 	public static void testDisplayPosts() {
 		PostsDAO dao = new PostsDAO();
-		ArrayList<Post> pl = dao.displayPosts();
+		List<Post> pl = dao.displayPosts();
 		System.out.println(pl);
 	}
 

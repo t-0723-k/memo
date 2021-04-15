@@ -1,13 +1,13 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import dao.PostsDAO;
 
 public class GetPostsListLogic {
-	public ArrayList<Post> execute() {
+	public List<Post> execute() {
 		PostsDAO dao = new PostsDAO();
-		ArrayList<Post> postsList = dao.displayPosts();
+		List<Post> postsList = dao.displayPosts();
 		return postsList;
 	}
 }

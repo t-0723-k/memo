@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Post;
 
@@ -14,9 +15,9 @@ public class PostsDAO {
 	private final String DB_PASS = "2020";
 
 //	メモ一覧の表示
-	public ArrayList<Post> displayPosts() {
+	public List<Post> displayPosts() {
 //		複数のPostのデータを入れるためのリスト
-		ArrayList<Post> postsList = new ArrayList<>();;
+		List<Post> postsList = new ArrayList<>();;
 
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
@@ -27,16 +28,29 @@ public class PostsDAO {
 //			SELECT文の実行
 			ResultSet rs = pStmt.executeQuery();
 
+			System.out.println(rs);
+
 			while(rs.next()) {
 //				一つの投稿を表すpostをnewして、DBから取り出したid,title,contentを入れてく
+
+//				int id = rs.getInt("ID");
+//				String title = rs.getString("TITLE");
+//				String content = rs.getString("CONTENT");
+//				Post pt = new Post();
+//				pt.setId(id);
+//				pt.setTitle(title);
+//				pt.setContent(content);
+
 				Post pt = new Post();
-				pt.setId(rs.getInt("id"));
-				pt.setTitle(rs.getString("title"));
-				pt.setContent(rs.getString("content"));
+				pt.setId(rs.getInt("ID"));
+				pt.setTitle(rs.getString("TITLE"));
+				pt.setContent(rs.getString("CONTENT"));
+
 //				postをリストに追加
 				postsList.add(pt);
 			}
 
+			return postsList;
 
 		} catch(Exception e) {
 //			request.setAttribute("message", "Exception:" + e.getMessage());
@@ -44,6 +58,5 @@ public class PostsDAO {
 			return null;
 		}
 
-		return postsList;
 	}
 }
