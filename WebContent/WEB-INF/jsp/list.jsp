@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ page import="dao.PostsDAO" %>
 <%@ page import="model.Post" %>
 <!DOCTYPE html>
 <html>
@@ -12,24 +13,29 @@
 <body>
 <h1>Hello Memo　　メモ一覧画面</h1>
 <%
-List<Post> postsList = (ArrayList<Post>)request.getAttribute("postsList");
+PostsDAO dao = new PostsDAO();
+List<Post> pl = dao.displayPosts();
 %>
 <table>
 	<tr>
 	 	<th>MEMO_ID</th>
 	 	<th>タイトル</th>
 	 </tr>
-	 <%--
 	 <%
-	 for(Post post : postsList) {
+	 for(Post post : pl) {
 	 %>
 	 <tr>
 	 	<td><%= post.getId() %></td>
-	 	タイトルを押下したら、ShowServletへPOST
-	 	<td><form action="<%=request.getContextPath() %>/ShowServlet" method="post"><a href=''><%=post.getTitle() %></a></form></td>
+
+	 	<%-- タイトルを押下したら、ShowServletへPOST--%>
+	 	<td>
+	 		<form action="<%=request.getContextPath() %>/ShowServlet" method="post">
+	 		<input type="hidden" name="id" value="<%= post.getId() %>">
+	 		<a href=''><%=post.getTitle() %></a>
+	 		</form>
+	 	</td>
 	 </tr>
 	 <% } %>
-	 --%>
 	 </table>
 	 <form action="<%=request.getContextPath() %>/NewServlet" method="get">
 	 <input type="submit" value="新規メモ">

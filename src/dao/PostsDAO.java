@@ -28,8 +28,6 @@ public class PostsDAO {
 //			SELECT文の実行
 			ResultSet rs = pStmt.executeQuery();
 
-			System.out.println(rs);
-
 			while(rs.next()) {
 //				一つの投稿を表すpostをnewして、DBから取り出したid,title,contentを入れてく
 
