@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>メモ一覧</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
+
 </head>
 <body>
 <h1>Hello Memo　　メモ一覧画面</h1>
@@ -22,6 +23,7 @@ List<Post> pl = dao.displayPosts();
 	 	<th>タイトル</th>
 	 </tr>
 	 <%
+	 int i = 1;
 	 for(Post post : pl) {
 	 %>
 	 <tr>
@@ -29,13 +31,15 @@ List<Post> pl = dao.displayPosts();
 
 	 	<%-- タイトルを押下したら、ShowServletへPOST--%>
 	 	<td>
-	 		<form action="<%=request.getContextPath() %>/ShowServlet" method="post">
+	 		<form action="<%=request.getContextPath() %>/ShowServlet" method="post" name="form_<%= i %>" id="form_<%= i %>" >
 	 		<input type="hidden" name="id" value="<%= post.getId() %>">
-	 		<a href=''><%=post.getTitle() %></a>
+	 		<a href="javascript:form_<%= i %>.submit()"><%=post.getTitle() %></a>
 	 		</form>
 	 	</td>
 	 </tr>
-	 <% } %>
+	 <%
+	 i ++;
+	 } %>
 	 </table>
 	 <form action="<%=request.getContextPath() %>/NewServlet" method="get">
 	 <input type="submit" value="新規メモ">

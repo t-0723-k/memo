@@ -21,6 +21,8 @@ public class ShowServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/show.jsp");
+		String val = request.getParameter("id");
+
 		dispatcher.forward(request, response);
 	}
 
