@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,29 +25,41 @@ public class ShowServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+//		int id = Integer.parseInt(request.getParameter("id"));
+//		String title = null;
+//		String content = null;
+//
+//		PostsDAO dao = new PostsDAO();
+//		List<Post> pl = dao.displayPosts();
+//
+//		for(Post post: pl) {
+//			int postId = post.getId();
+//			if(postId == id) {
+//				title = post.getTitle();
+//				content = post.getContent();
+//			}
+//		}
+//
+//		Post showPost = new Post();
+//		showPost.setId(id);
+//		showPost.setTitle(title);
+//		showPost.setContent(content);
+
 		int id = Integer.parseInt(request.getParameter("id"));
-		String title = null;
-		String content = null;
-
 		PostsDAO dao = new PostsDAO();
-		List<Post> pl = dao.displayPosts();
+		Post showPostPlace = dao.showPost(id);
 
-		for(Post post: pl) {
-			int postId = post.getId();
-			if(postId == id) {
-				title = post.getTitle();
-				content = post.getContent();
-			}
-		}
+		int showId = showPostPlace.getId();
+		String showTitle = showPostPlace.getTitle();
+		String showContent = showPostPlace.getContent();
 
 		Post showPost = new Post();
-		showPost.setId(id);
-		showPost.setTitle(title);
-		showPost.setContent(content);
+		showPost.setId(showId);
+		showPost.setTitle(showTitle);
+		showPost.setContent(showContent);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("showPost", showPost);
-
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/show.jsp");
 		dispatcher.forward(request, response);

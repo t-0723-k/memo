@@ -17,7 +17,7 @@ public class PostsDAO {
 //	メモ一覧の表示
 	public List<Post> displayPosts() {
 //		複数のPostのデータを入れるためのリスト
-		List<Post> postsList = new ArrayList<>();;
+		List<Post> postsList = new ArrayList<>();
 
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
@@ -58,7 +58,31 @@ public class PostsDAO {
 
 	}
 
-	public Post showPost() {
+	public Post showPost(int id) {
+//		表示するPostのデータを入れるための変数
+		Post showPost = new Post();
 
+//		DB接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+//			SQL文の準備
+			String sql = "SELECT * FROM POSTS WHERE ID = " + id;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+//			SELECT文の実行
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				showPost.setId(rs.getInt("ID"));
+				showPost.setTitle(rs.getString("TITLE"));
+				showPost.setContent(rs.getString("CONTENT"));
+			}
+
+			return showPost;
+
+		} catch(Exception e) {
+//			request.setAttribute("message", "Exception:" + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

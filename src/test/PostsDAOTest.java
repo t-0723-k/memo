@@ -9,6 +9,7 @@ public class PostsDAOTest {
 
 	public static void main(String[] args) {
 		testDisplayPosts();
+		testShowPost(1);
 
 	}
 
@@ -22,6 +23,14 @@ public class PostsDAOTest {
 			System.out.println(post.getContent());
 		}
 
+	}
+
+	public static void testShowPost(int id) {
+		PostsDAO dao = new PostsDAO();
+		Post showPost = dao.showPost(id);
+		System.out.println(showPost.getId());
+		System.out.println(showPost.getTitle());
+		System.out.println(showPost.getContent());
 	}
 
 }
