@@ -14,6 +14,11 @@ public class PostsDAO {
 	private final String DB_USER = "postgres";
 	private final String DB_PASS = "2020";
 
+//	private Connection conn;
+//	private PreparedStatement ps = null;
+//	private ResultSet rs = null;
+
+
 //	メモ一覧の表示
 	public List<Post> displayPosts() {
 //		複数のPostのデータを入れるためのリスト
@@ -22,7 +27,7 @@ public class PostsDAO {
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 //			SQL文の準備
-			String sql = "SELECT * FROM POSTS";
+			String sql = "SELECT * FROM POSTS ORDER BY ID";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 //			SELECT文の実行
@@ -89,16 +94,31 @@ public class PostsDAO {
 	public void updatePost(int id, String editTitle, String editContent) {
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+//			自動コミットを禁止
+			conn.setAutoCommit(false);
+
 //			SQL文の準備
 			String sql1 = "UPDATE POSTS SET TITLE='" + editTitle + "', CONTENT='" + editContent + "' WHERE ID = " + id;
 			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
 
 //			SELECT文の実行
-			pStmt1.executeQuery();
+			pStmt1.executeUpdate();
+
+			conn.commit();
+
 
 		} catch(Exception e) {
 //			request.setAttribute("message", "Exception:" + e.getMessage());
 			e.printStackTrace();
+//		} finally {
+//			try {
+//				pStmt1.close();
+//				conn.close();
+//			} catch (Exception ex) {
+//			//	logger.error(" 쳣" + ex.getMessage() + "    .");
+//				ex.printStackTrace();
+//			}
 		}
+
 	}
 }

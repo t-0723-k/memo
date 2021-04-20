@@ -10,7 +10,7 @@ public class PostsDAOTest {
 	public static void main(String[] args) {
 //		testDisplayPosts();
 //		testShowPost(1);
-		testUpdatePost(1, "testTitle", "testContent");
+		testUpdatePost(1, "aaa", "aaa");
 
 	}
 

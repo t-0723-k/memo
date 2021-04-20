@@ -14,6 +14,7 @@ Post showPost = (Post) session.getAttribute("showPost");
 <body>
 <h1>Hello Memo　　メモ編集画面</h1>
 <form action="<%=request.getContextPath() %>/UpdateServlet" method="post">
+	<input type="hidden" name="id" value="<%= showPost.getId() %>">
 	<h3>タイトル：</h3>
 	<input type="text" name="editTitle" value="<%= showPost.getTitle() %>">
 	<h3>本文：</h3>
