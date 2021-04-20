@@ -16,8 +16,21 @@ Post showPost = (Post) session.getAttribute("showPost");
 <h3>メモID：<%= showPost.getId() %></h3>
 <h3>タイトル：<%= showPost.getTitle() %></h3>
 <p>本文：<%= showPost.getContent() %></p>
+
 <%-- 新規メモはリダイレクト、編集・削除はPOST --%>
-<a href="<%=request.getContextPath() %>/NewServlet">新規メモ</a><a href="<%=request.getContextPath() %>/EditServlet">編集</a><a href="<%=request.getContextPath() %>/DeleteServlet">削除</a>
+<div style="display:inline-flex">
+	<form action="<%=request.getContextPath() %>/ListServlet" method="get">
+		<input class="btn" type="submit" value="戻る">
+	</form>
+	<form action="<%=request.getContextPath() %>/EditServlet" method="get">
+<%-- 	<input type="hidden" name="id" value="<%= showPost.getId() %>">  --%>
+		<input class="btn" type="submit" value="編集">
+	</form>
+	<form action="<%=request.getContextPath() %>/DeleteServlet" method="post">
+		<input type="hidden" name="id" value="<%= showPost.getId() %>">
+		<input class="btn" type="submit" value="削除">
+	</form>
+</div>
 </body>
 </html>
 

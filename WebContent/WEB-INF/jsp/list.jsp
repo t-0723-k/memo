@@ -42,7 +42,7 @@ List<Post> pl = dao.displayPosts();
 	 } %>
 	 </table>
 	 <form action="<%=request.getContextPath() %>/NewServlet" method="get">
-	 <input type="submit" value="新規メモ">
+	 <input class="btn" type="submit" value="新規メモ">
 	 </form>
 </body>
 </html>

@@ -8,8 +8,9 @@ import model.Post;
 public class PostsDAOTest {
 
 	public static void main(String[] args) {
-		testDisplayPosts();
-		testShowPost(1);
+//		testDisplayPosts();
+//		testShowPost(1);
+		testUpdatePost(1, "testTitle", "testContent");
 
 	}
 
@@ -31,6 +32,11 @@ public class PostsDAOTest {
 		System.out.println(showPost.getId());
 		System.out.println(showPost.getTitle());
 		System.out.println(showPost.getContent());
+	}
+
+	public static void testUpdatePost(int id, String editTitle, String editContent) {
+		PostsDAO dao = new PostsDAO();
+		dao.updatePost(id, editTitle, editContent);
 	}
 
 }

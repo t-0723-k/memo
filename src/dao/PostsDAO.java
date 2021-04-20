@@ -85,4 +85,20 @@ public class PostsDAO {
 			return null;
 		}
 	}
+
+	public void updatePost(int id, String editTitle, String editContent) {
+//		DB接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+//			SQL文の準備
+			String sql1 = "UPDATE POSTS SET TITLE='" + editTitle + "', CONTENT='" + editContent + "' WHERE ID = " + id;
+			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+
+//			SELECT文の実行
+			pStmt1.executeQuery();
+
+		} catch(Exception e) {
+//			request.setAttribute("message", "Exception:" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
 }
