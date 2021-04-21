@@ -10,18 +10,16 @@
 </head>
 <body>
 <h1>Hello Memo　　新規メモ作成画面</h1>
-<div style="display:inline-flex">
 <form action="<%=request.getContextPath() %>/CreateServlet" method="post">
 <h3>タイトル：</h3>
-<input type="text">
+<input type="text" name="createTitle">
 <h3>本文：</h3>
-<textarea rows="4" cols="40"></textarea><br>
+<textarea name="createContent" rows="4" cols="40"></textarea><br>
 <input type="submit" value="新規メモ登録">
 </form>
 <form action="<%=request.getContextPath() %>/ListServlet" method="get">
 <input type="submit" value="戻る">
 </form>
-</div>
 </body>
 </html>
 

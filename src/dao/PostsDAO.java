@@ -98,11 +98,11 @@ public class PostsDAO {
 			conn.setAutoCommit(false);
 
 //			SQL文の準備
-			String sql1 = "UPDATE POSTS SET TITLE='" + editTitle + "', CONTENT='" + editContent + "' WHERE ID = " + id;
-			PreparedStatement pStmt1 = conn.prepareStatement(sql1);
+			String sql = "UPDATE POSTS SET TITLE='" + editTitle + "', CONTENT='" + editContent + "' WHERE ID = " + id;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-//			SELECT文の実行
-			pStmt1.executeUpdate();
+//			UPDATE文の実行
+			pStmt.executeUpdate();
 
 			conn.commit();
 
@@ -118,6 +118,28 @@ public class PostsDAO {
 //			//	logger.error(" 쳣" + ex.getMessage() + "    .");
 //				ex.printStackTrace();
 //			}
+		}
+
+	}
+
+	public void createPost(String createTitle, String createContent) {
+//		DB接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+//			自動コミットを禁止
+			conn.setAutoCommit(false);
+
+//			SQL文の準備
+			String sql = "INSERT INTO POSTS (TITLE, CONTENT) VALUES('" + createTitle + "','" + createContent + "')";
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+//			UPDATE文の実行
+			pStmt.executeUpdate();
+
+			conn.commit();
+
+		} catch(Exception e) {
+//			request.setAttribute("message", "Exception:" + e.getMessage());
+			e.printStackTrace();
 		}
 
 	}

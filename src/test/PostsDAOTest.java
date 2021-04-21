@@ -10,7 +10,8 @@ public class PostsDAOTest {
 	public static void main(String[] args) {
 //		testDisplayPosts();
 //		testShowPost(1);
-		testUpdatePost(1, "aaa", "aaa");
+//		testUpdatePost(1, "aaa", "aaa");
+		testCreatePost("新規", "新規");
 
 	}
 
@@ -37,6 +38,11 @@ public class PostsDAOTest {
 	public static void testUpdatePost(int id, String editTitle, String editContent) {
 		PostsDAO dao = new PostsDAO();
 		dao.updatePost(id, editTitle, editContent);
+	}
+
+	public static void testCreatePost(String createTitle, String createContent) {
+		PostsDAO dao = new PostsDAO();
+		dao.createPost(createTitle, createContent);
 	}
 
 }
