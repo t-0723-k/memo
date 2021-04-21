@@ -10,18 +10,40 @@
 </head>
 <body>
 <h1>Hello Memo　　新規メモ作成画面</h1>
-<form action="<%=request.getContextPath() %>/CreateServlet" method="post">
+<%--
+JavaScriptで
+--%>
+
+<form name="form1" action="<%=request.getContextPath() %>/CreateServlet" method="post">
 <h3>タイトル：</h3>
-<input type="text" name="createTitle">
+<input id="createTitle" type="text" name="createTitle">
 <h3>本文：</h3>
-<textarea name="createContent" rows="4" cols="40"></textarea><br>
-<input type="submit" value="新規メモ登録">
+<textarea id="createContent" name="createContent" rows="4" cols="40"></textarea><br>
+<input id="button1" type="submit" value="新規メモ登録">
 </form>
 <form action="<%=request.getContextPath() %>/ListServlet" method="get">
 <input type="submit" value="戻る">
 </form>
 </body>
 </html>
+
+<script language="javascript" type="text/javascript">
+    var createTitle = document.getElementById('createTitle').value;
+    var createContent = document.getElementById('createContent').value;
+    var button1 = document.getElementById('button1');
+
+    button1.addEventListener('click', (e) => {
+      // デフォルトのイベントをキャンセル
+      e.preventDefault();
+
+      if(createTitle == '' || createContent == '') {
+        alert('タイトルと本文を入力してください。');
+      } else {
+        document.form1.submit();
+      }
+    });
+  </script>
+
 
 <%--
 <div style="display:inline-flex">
