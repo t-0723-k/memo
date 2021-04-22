@@ -143,4 +143,26 @@ public class PostsDAO {
 		}
 
 	}
+
+	public void deletePost(int id) {
+//		DB接続
+		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+//			自動コミットを禁止
+			conn.setAutoCommit(false);
+
+//			SQL文の準備
+			String sql = "UPDATE posts SET used = 1 WHERE id = " + id;
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+
+//			UPDATE文の実行
+			pStmt.executeUpdate();
+
+			conn.commit();
+
+		} catch(Exception e) {
+//			request.setAttribute("message", "Exception:" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 }

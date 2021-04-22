@@ -11,7 +11,8 @@ public class PostsDAOTest {
 //		testDisplayPosts();
 //		testShowPost(1);
 //		testUpdatePost(1, "aaa", "aaa");
-		testCreatePost("新規", "新規");
+//		testCreatePost("新規", "新規");
+		testDeletePost(10);
 
 	}
 
@@ -43,6 +44,11 @@ public class PostsDAOTest {
 	public static void testCreatePost(String createTitle, String createContent) {
 		PostsDAO dao = new PostsDAO();
 		dao.createPost(createTitle, createContent);
+	}
+
+	public static void testDeletePost(int id) {
+		PostsDAO dao = new PostsDAO();
+		dao.deletePost(id);
 	}
 
 }
