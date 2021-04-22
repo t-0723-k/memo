@@ -8,11 +8,11 @@ import model.Post;
 public class PostsDAOTest {
 
 	public static void main(String[] args) {
-//		testDisplayPosts();
+		testDisplayPosts();
 //		testShowPost(1);
 //		testUpdatePost(1, "aaa", "aaa");
 //		testCreatePost("新規", "新規");
-		testDeletePost(10);
+//		testDeletePost(10);
 
 	}
 

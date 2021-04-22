@@ -27,7 +27,7 @@ public class PostsDAO {
 //		DB接続
 		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 //			SQL文の準備
-			String sql = "SELECT * FROM POSTS ORDER BY ID";
+			String sql = "SELECT * FROM POSTS WHERE used ISNULL ORDER BY ID";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 //			SELECT文の実行
