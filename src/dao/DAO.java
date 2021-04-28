@@ -11,47 +11,34 @@ public abstract class DAO {
 	private final String DB_USER = "postgres";
 	private final String DB_PASS = "2020";
 	private Connection conn = null;
-	private PreparedStatement pStmt = null;
+	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 
-	protected final ResultSet getConnection(String sql) {
+	public ResultSet getResultSet(String sql) {
+		
 		try {
+			
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-			pStmt = conn.prepareStatement(sql);
-			rs = pStmt.executeQuery();
-			while (rs.next()) {
-				setPost(rs.getPost("post"));
-//				showPost.setTitle(rs.getString("TITLE"));
-//				showPost.setContent(rs.getString("CONTENT"));
-			}
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		return this.rs;
+		return rs;	
 	}
 
-//	final void setConnection(Connection conn) {
-//		this.conn = conn;
-//	}
+	public void update(String sql) {
+		
+		try {
+			
+			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+			ps = conn.prepareStatement(sql);
+			ps.executeUpdate();
 
-	final public ResultSet getpStmt1(String sql) {
-		conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
-		pStmt = conn.prepareStatement(sql);
-		rs = pStmt.executeQuery();
-		return rs;
-	}
-
-	public void setpStmt1(PreparedStatement pStmt) {
-		this.pStmt = pStmt;
-	}
-	
-	public PreparedStatement getpStmt2() {
-		return pStmt;
-	}
-	
-	public void setpStmt2(PreparedStatement pStmt) {
-		this.pStmt = pStmt;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 }

@@ -1,7 +1,5 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,54 +8,65 @@ import java.util.List;
 import model.Post;
 
 public class PostsDAO extends DAO{
-	private Connection conn = null;
-	private PreparedStatement pStmt = null;
-	private ResultSet rs = null;
 
 	public List<Post> selectList(String sql) throws SQLException{
-//		DB接続
-		conn = super.getConnection();
-		pStmt = conn.prepareStatement(sql);
-		rs = pStmt.executeQuery();
-//		postList作成
-		List<Post> postsList = new ArrayList<>();PreparedStatement pStmt = conn.prepareStatement(sql);
-		while(rs.next()) {
-			Post pt = new Post();
-			pt.setId(rs.getInt("ID"));
-			pt.setTitle(rs.getString("TITLE"));
-			pt.setContent(rs.getString("CONTENT"));
-//			postをリストに追加
-			postsList.add(pt);
+		
+		List<Post> lp = new ArrayList<Post>();
+		
+		ResultSet rs = super.getResultSet(sql);
+		
+		try {
+			while(rs.next()) {
+				Post p = new Post();
+				p.setId(rs.getInt("ID"));
+				p.setTitle(rs.getString("TITLE"));
+				p.setContent(rs.getString("CONTENT"));
+				lp.add(p);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return postsList;
+		return lp;
 	}
 
 
 	public Post selectPost(String sql) throws SQLException{
-//		DB接続
-		rs = super.getConnection(sql);
-//		Post作成
-		Post showPost = new Post();
+		
+		Post p = new Post();
+		
+		ResultSet rs = super.getResultSet(sql);
+		
+		
 		while (rs.next()) {
-			showPost.setId(rs.getInt("ID"));
-			showPost.setTitle(rs.getString("TITLE"));
-			showPost.setContent(rs.getString("CONTENT"));
+			p.setId(rs.getInt("ID"));
+			p.setTitle(rs.getString("TITLE"));
+			p.setContent(rs.getString("CONTENT"));
 		}
-		return showPost;
+		return p;
 	}
 
-	public void update(String sql) throws SQLException {
-//		DB接続
-		conn = super.getConnection();
-		PreparedStatement pStmt = conn.prepareStatement(sql);
-//		自動コミットを禁止
-		conn.setAutoCommit(false);
-//		UPDATE文の実行
-		pStmt.executeUpdate();
-//		コミット
-		conn.commit();
-	}
+//	public void updatePost(String sql){
+//
+//		super.update(sql);
+//		
+//	}
 
+	
+	
+	
+//	
+//	public void update(String sql) throws SQLException {
+////		DB接続
+//		conn = super.getConnection();
+//		PreparedStatement pStmt = conn.prepareStatement(sql);
+////		自動コミットを禁止
+//		conn.setAutoCommit(false);
+////		UPDATE文の実行
+//		pStmt.executeUpdate();
+////		コミット
+//		conn.commit();
+//	}
+//
 
 
 
