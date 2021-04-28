@@ -27,7 +27,7 @@ List<Post> pl = dao.displayPosts();
 	 for(Post post : pl) {
 	 %>
 	 <tr>
-	 	<td><%= post.getId() %></td>
+	 	<td><%= i %></td>
 
 	 	<%-- タイトルを押下したら、ShowServletへPOST--%>
 	 	<td>

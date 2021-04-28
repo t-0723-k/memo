@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>メモ新規作成</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
 <h1>Hello Memo　　新規メモ作成画面</h1>
@@ -28,11 +29,12 @@ JavaScriptで
 </html>
 
 <script language="javascript" type="text/javascript">
-    var createTitle = document.getElementById('createTitle').value;
-    var createContent = document.getElementById('createContent').value;
-    var button1 = document.getElementById('button1');
 
     button1.addEventListener('click', (e) => {
+        var createTitle = document.getElementById('createTitle').value;
+        var createContent = document.getElementById('createContent').value;
+        var button1 = document.getElementById('button1');
+
       // デフォルトのイベントをキャンセル
       e.preventDefault();
 

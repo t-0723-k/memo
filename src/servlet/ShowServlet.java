@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.PostsDAO;
 import model.Post;
+import service.PostsService;
 
 @WebServlet("/ShowServlet")
 public class ShowServlet extends HttpServlet {
@@ -46,20 +46,12 @@ public class ShowServlet extends HttpServlet {
 //		showPost.setContent(content);
 
 		int id = Integer.parseInt(request.getParameter("id"));
-		PostsDAO dao = new PostsDAO();
-		Post showPostPlace = dao.showPost(id);
-
-		int showId = showPostPlace.getId();
-		String showTitle = showPostPlace.getTitle();
-		String showContent = showPostPlace.getContent();
-
-		Post showPost = new Post();
-		showPost.setId(showId);
-		showPost.setTitle(showTitle);
-		showPost.setContent(showContent);
+		
+		PostsService ps = new PostsService();
+		Post p = ps.showPost(id);
 
 		HttpSession session = request.getSession();
-		session.setAttribute("showPost", showPost);
+		session.setAttribute("showPost", p);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/show.jsp");
 		dispatcher.forward(request, response);

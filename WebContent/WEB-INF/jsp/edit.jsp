@@ -10,6 +10,7 @@ Post showPost = (Post) session.getAttribute("showPost");
 <head>
 <meta charset="UTF-8">
 <title>メモ編集</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
 <h1>Hello Memo　　メモ編集画面</h1>

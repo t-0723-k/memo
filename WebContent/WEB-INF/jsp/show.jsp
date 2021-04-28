@@ -10,10 +10,11 @@ Post showPost = (Post) session.getAttribute("showPost");
 <head>
 <meta charset="UTF-8">
 <title>メモ詳細</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
 <h1>Hello Memo　　メモ詳細画面</h1>
-<h3>メモID：<%= showPost.getId() %></h3>
+<%-- <h3>メモID：<%= showPost.getId() %></h3>--%>
 <h3>タイトル：<%= showPost.getTitle() %></h3>
 <p>本文：<%= showPost.getContent() %></p>
 
