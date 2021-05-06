@@ -17,12 +17,14 @@ public abstract class DAO {
 	public ResultSet getResultSet(String sql) {
 		
 		try {
+			String driver = "postgresql.Driver";
+			Class.forName(driver);
 			
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return rs;	
@@ -31,12 +33,14 @@ public abstract class DAO {
 	public void update(String sql) {
 		
 		try {
+			String driver = "org.postgresql.Driver";
+			Class.forName(driver);
 			
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
 			ps = conn.prepareStatement(sql);
 			ps.executeUpdate();
 
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}	
 	}

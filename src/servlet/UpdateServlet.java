@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.PostsDAO;
 import model.Post;
+import service.PostsService;
 
 
 @WebServlet("/UpdateServlet")
@@ -30,8 +31,13 @@ public class UpdateServlet extends HttpServlet {
 		String editTitle = request.getParameter("editTitle");
 		String editContent = request.getParameter("editContent");
 
-		PostsDAO dao = new PostsDAO();
-		dao.updatePost(id, editTitle, editContent);
+		PostsService ps = new PostsService();
+		try {
+			ps.updatePost(id, editTitle, editContent);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		Post showPost = new Post();
 		showPost.setId(id);

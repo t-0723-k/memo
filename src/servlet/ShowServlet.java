@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +49,13 @@ public class ShowServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		PostsService ps = new PostsService();
-		Post p = ps.showPost(id);
+		Post p = null;
+		try {
+			p = ps.showPost(id);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		HttpSession session = request.getSession();
 		session.setAttribute("showPost", p);

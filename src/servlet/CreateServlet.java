@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.PostsDAO;
+import service.PostsService;
 
 
 @WebServlet("/CreateServlet")
@@ -27,8 +28,13 @@ public class CreateServlet extends HttpServlet {
 		String createTitle = request.getParameter("createTitle");
 		String createContent = request.getParameter("createContent");
 
-		PostsDAO dao = new PostsDAO();
-		dao.createPost(createTitle, createContent);
+		PostsService ps = new PostsService();
+		try {
+			ps.createPost(createTitle, createContent);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/list.jsp");
 		dispatcher.forward(request, response);

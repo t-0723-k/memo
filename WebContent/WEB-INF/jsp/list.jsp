@@ -1,3 +1,4 @@
+<%@page import="service.PostsService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
@@ -14,8 +15,8 @@
 <body>
 <h1>Hello Memo　　メモ一覧画面</h1>
 <%
-PostsDAO dao = new PostsDAO();
-List<Post> pl = dao.displayPosts();
+PostsService ps = new PostsService();
+List<Post> lp = ps.allPost();
 %>
 <table>
 	<tr>
@@ -24,7 +25,7 @@ List<Post> pl = dao.displayPosts();
 	 </tr>
 	 <%
 	 int i = 1;
-	 for(Post post : pl) {
+	 for(Post p : lp) {
 	 %>
 	 <tr>
 	 	<td><%= i %></td>
@@ -32,8 +33,8 @@ List<Post> pl = dao.displayPosts();
 	 	<%-- タイトルを押下したら、ShowServletへPOST--%>
 	 	<td>
 	 		<form action="<%=request.getContextPath() %>/ShowServlet" method="post" name="form_<%= i %>" id="form_<%= i %>" >
-	 		<input type="hidden" name="id" value="<%= post.getId() %>">
-	 		<a href="javascript:form_<%= i %>.submit()"><%=post.getTitle() %></a>
+	 		<input type="hidden" name="id" value="<%= p.getId() %>">
+	 		<a href="javascript:form_<%= i %>.submit()"><%=p.getTitle() %></a>
 	 		</form>
 	 	</td>
 	 </tr>
