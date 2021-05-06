@@ -17,7 +17,7 @@ public abstract class DAO {
 	public ResultSet getResultSet(String sql) {
 		
 		try {
-			String driver = "postgresql.Driver";
+			String driver = "org.postgresql.Driver";
 			Class.forName(driver);
 			
 			conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
