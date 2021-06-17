@@ -15,14 +15,8 @@ public class ListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//		request.setAttribute("message", "hello paiza memo");
-//		String view = "/WEB-INF/views/list.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher( "/WEB-INF/jsp/list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher( "index.jsp");
 		dispatcher.forward(request, response);
-//
-//		if(request.getAttribute("message") == null) {
-//			request.setAttribute("message", "hello memo");
-//		}
 
 	}
 

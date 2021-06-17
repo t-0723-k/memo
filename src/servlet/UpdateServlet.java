@@ -39,10 +39,12 @@ public class UpdateServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		Post showPost = new Post();
-		showPost.setId(id);
-		showPost.setTitle(editTitle);
-		showPost.setContent(editContent);
+		Post showPost = new Post(id, editTitle, editContent);
+		
+//		Post showPost = new Post();
+//		showPost.setId(id);
+//		showPost.setTitle(editTitle);
+//		showPost.setContent(editContent);
 
 		HttpSession session = request.getSession();
 		session.setAttribute("showPost", showPost);

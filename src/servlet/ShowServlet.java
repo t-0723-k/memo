@@ -26,25 +26,6 @@ public class ShowServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-//		int id = Integer.parseInt(request.getParameter("id"));
-//		String title = null;
-//		String content = null;
-//
-//		PostsDAO dao = new PostsDAO();
-//		List<Post> pl = dao.displayPosts();
-//
-//		for(Post post: pl) {
-//			int postId = post.getId();
-//			if(postId == id) {
-//				title = post.getTitle();
-//				content = post.getContent();
-//			}
-//		}
-//
-//		Post showPost = new Post();
-//		showPost.setId(id);
-//		showPost.setTitle(title);
-//		showPost.setContent(content);
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		
