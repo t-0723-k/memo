@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment></comment>
+	<entry key="driverClassName">org.postgresql.Driver</entry>
+	
+	<entry key="url">jdbc:postgresql://localhost:5432/memo</entry>
+	<entry key="username">postgres</entry>
+	<entry key="password">2020</entry>
+	
+	<entry key="initialSize">5</entry>
+	<entry key="maxActive">20</entry>
+	<entry key="maxIdle">5</entry>
+	<entry key="maxWait">10000</entry>
+	<entry key="poolPreparedStatements">true</entry>
+	<entry key="validationQuery">select * from pg_stat_activity</entry>
+</properties>

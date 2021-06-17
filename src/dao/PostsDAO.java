@@ -1,24 +1,47 @@
 package dao;
 
-import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Post;
 
-public class PostsDAO {
-	private final String JDBC_URL = "jdbc:postgresql://localhost:5432/memo";
-	private final String DB_USER = "postgres";
-	private final String DB_PASS = "2020";
+public class PostsDAO extends DAO{
 
-//	メモ一覧の表示
-	public Post displayPosts() {
-		Post post = null;
-
-//		DB接続
-		try(Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-//			SQL文の準備
-
-		} catch() {
-
+	public List<Post> selectList(String sql) throws SQLException{
+		
+		List<Post> lp = new ArrayList<Post>();
+		
+		ResultSet rs = super.getResultSet(sql);
+		
+		try {
+			while(rs.next()) {				
+				Post p = new Post();
+				p.setId(rs.getInt("ID"));
+				p.setTitle(rs.getString("TITLE"));
+				p.setContent(rs.getString("CONTENT"));
+				lp.add(p);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return lp;
+	}
+
+
+	public Post selectPost(String sql) throws SQLException{
+		
+		Post p = new Post();
+		
+		ResultSet rs = super.getResultSet(sql);
+		
+		
+		while (rs.next()) {
+			p.setId(rs.getInt("ID"));
+			p.setTitle(rs.getString("TITLE"));
+			p.setContent(rs.getString("CONTENT"));
+		}
+		return p;
 	}
 }
